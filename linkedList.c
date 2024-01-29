@@ -43,6 +43,17 @@ int addDataMiddle(struct Node *head,int pos, int value){
     }
     printData("Middle Item adds - ",head);
 }
+int searchItem(struct Node *head, int value){
+    int index = 1;
+    while(head != NULL){
+        if(head->data == value){
+            return index;
+        }
+        index++;
+        head = head->next;
+    }
+    return -1;
+}
 struct Node *printLinkedList(int arr[], int size){
     struct Node *head = NULL, *current = NULL, *temp= NULL;
     for(int i=0; i<size; i++){
@@ -75,13 +86,13 @@ void printData(const char *message, struct Node *head) {
     }
     printf("%d -> NULL\n", current->data);
 }
-
 int main() {
     int arr[] = {10, 20, 30, 40, 50};
     int size = sizeof(arr) / sizeof(arr[0]);
     struct Node *head = NULL;
     head = printLinkedList(arr, size);
-    printData("Original List: ", head);  
+    printData("Original List -",head);  
+    printf("Search Index - %d\n", searchItem(head, 40));
     insertValueFirst(head, 500);
     insertValueLast(head, 200);
     addDataMiddle(head, 2, 300);
