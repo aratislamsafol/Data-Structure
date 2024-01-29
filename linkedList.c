@@ -54,6 +54,23 @@ int searchItem(struct Node *head, int value){
     }
     return -1;
 }
+// Delete a specific Item
+int deleteItem(struct Node *head, int value){
+    struct Node *dummyHead = (struct Node *)malloc(sizeof(struct Node));
+    dummyHead->next = head;
+    struct Node *temp = dummyHead;
+    while(temp->next != NULL){
+        if(temp->next->data == value){
+            temp->next = temp->next->next;
+            break;
+        }else{
+            temp = temp->next;
+        }
+        temp=temp->next;
+    }
+    
+    return dummyHead->next;
+}
 struct Node *printLinkedList(int arr[], int size){
     struct Node *head = NULL, *current = NULL, *temp= NULL;
     for(int i=0; i<size; i++){
@@ -86,6 +103,7 @@ void printData(const char *message, struct Node *head) {
     }
     printf("%d -> NULL\n", current->data);
 }
+
 int main() {
     int arr[] = {10, 20, 30, 40, 50};
     int size = sizeof(arr) / sizeof(arr[0]);
@@ -96,7 +114,9 @@ int main() {
     insertValueFirst(head, 500);
     insertValueLast(head, 200);
     addDataMiddle(head, 2, 300);
-     addDataMiddle(head, 4, 6000);
+    addDataMiddle(head, 4, 6000);
+    struct Node *newHead = deleteItem(head, 10);
+    printData("Original List -",newHead); 
     printf("\n");
 
     return 0;
